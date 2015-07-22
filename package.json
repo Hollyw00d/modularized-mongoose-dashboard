@@ -1,11 +1,11 @@
 {
-  "name": "mongoose-dashboard",
+  "name": "modularized-mongoose-dashboard",
   "version": "0.0.1",
-  "description": "mongoose dashboard using node.js",
+  "description": "modularized mongoose dashboard using node.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hollyw00d/mongoose-dashboard"
+    "url": "https://github.com/Hollyw00d/modularized-mongoose-dashboard"
   },
   "scripts": {
     "start": "node server.js"

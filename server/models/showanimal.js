@@ -1,11 +1,22 @@
 // Require mongoose
 var mongoose = require("mongoose");
 
-// Create new schema for inserting an animal into the DB
+// Create new schemas for
+// CRUD animals into/from database
 var AnimalSchema = new mongoose.Schema({
     name: String,
     updated_at: {type: Date, default: Date.now}
 });
 
-// connect my collection and model schema
+// Schema for adding animals into database
+var AddAnimalSchema = new mongoose.Schema({
+    name: String,
+    updated_at: {type: Date, default: Date.now}
+});
+
+// Connect my collection and model schemas
 mongoose.model("Animal", AnimalSchema);
+mongoose.model("AddAnimal", AddAnimalSchema);
+
+
+

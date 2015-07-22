@@ -9,16 +9,19 @@ module.exports = function(app) {
         showanimals.show(req, res);
     });
 
+    // Form page to add new animals
+    // to MongoDB collection
     app.get("/mongooses/new", function(req, res){
-        res.render("new");
+        showanimals.newanimalform(req, res);
     });
 
+    // Show a single animal
     app.get("/mongooses/:id", function(req, res) {
-        Animal.findOne({_id: req.params.id}, function(err, animal) {
+        showanimals.showSingleAnimal(req, res);
 
-            res.render("animal", {animal: animal});
-        });
     });
+
+
 
     app.get("/mongooses/:id/edit", function(req, res) {
         Animal.findOne({_id: req.params.id}, function(err, animal) {
@@ -29,30 +32,42 @@ module.exports = function(app) {
         });
     });
 
-// Route to add an animal to DB
+
+
+
+
+
+    // Route to add an animal to DB
     app.post("/mongooses", function(req, res) {
-        // Show form data posted
-        console.log("POST DATA", req.body);
+
+        showanimals.addanimal(req, res);
+
+        //// Show form data posted
+        //console.log("POST DATA", req.body);
 
         // Create a new animal with the
         // corresponding "name" form field
         // from req.body
-        var animal = new Animal({
-            name: req.body.name
-        });
+        //var animal = new Animal({
+        //    name: req.body.name
+        //});
 
-        // Save a single animal into MongoDB
-        animal.save(function(err) {
-            if(err) {
-                console.log("Animal not saved in MongoDB 'animals' database.")
-            }
-            else {
-                console.log("Successfully updated an animal.");
-                res.redirect("/");
-            }
-        });
+        //// Save a single animal into MongoDB
+        //animal.save(function(err) {
+        //    if(err) {
+        //        console.log("Animal not saved in MongoDB 'animals' database.")
+        //    }
+        //    else {
+        //        console.log("Successfully updated an animal.");
+        //        res.redirect("/");
+        //    }
+        //});
 
     });
+
+
+
+
 
 // Route to update a single
 // animal document

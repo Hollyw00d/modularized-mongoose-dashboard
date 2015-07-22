@@ -41,7 +41,9 @@ showanimalsController.addanimal = function(req, res) {
         //console.log("POST DATA", req.body);
 
         if(err) {
-            console.log("Animal not added to 'animals' collection.")
+            console.log("Animal not added to 'animals' collection.");
+
+            res.render("/mongooses/new");
         }
         else {
             console.log("Successfully updated an animal.");
@@ -73,20 +75,43 @@ showanimalsController.updateSingleAnimal = function(req, res) {
     });
 };
 
+// Update a single animal name controller method
 showanimalsController.executeUpdateAnimal = function(req, res) {
-    // Create a new "animal" object
-    // to update a single animal
-    var animal = new Animal(req.body);
 
-    // Operate to update a single animal
-    animal.update({_id: req.params.id}, {name: req.body.name}, function(err, animal) {
-        console.log("Animal updated", animal);
-        res.redirect("/");
+    // Update a single animal
+    Animal.update({_id: req.params.id}, {$set: {name: req.body.name} }, function(err) {
+
+        // If error exists display it
+        if(err) {
+            console.log("Update Animal Error:", err);
+        }
+        // Else update a single animal name
+        else {
+            console.log("New Animal Name:", req.body.name);
+            res.redirect("/");
+        }
+
     });
 
 };
 
+// Delete a single animal document method
+showanimalsController.deleteAnimal = function(req, res) {
 
+    // Delete a single animal document
+    // and redirect to the home page
+    Animal.remove({_id: req.params.id}, function(err) {
 
+        // If error exists display it
+        if(err) {
+            console.log("Delete Animal Error", err);
+        }
+        else {
+            console.log("Animal deleted!");
+            res.redirect("/");
+        }
+
+    });
+};
 
 module.exports = showanimalsController;

@@ -36,34 +36,14 @@ module.exports = function(app) {
     // animal document
     app.post("/mongooses/:id", function(req, res) {
         showanimals.executeUpdateAnimal(req, res);
-
-        // Create a new animal with the
-        // corresponding "name" form field
-        // from req.body
-        //var animal = new Animal({
-        //    name: req.body.name
-        //});
-
-        //Update a single animal document
-        //and redirect to the home page
-        //Animal.update({_id: req.params.id}, {name: req.body.name}, function(err, animal) {
-        //    res.redirect("/");
-        //});
-
     });
 
 // Route to delete a single
 // animal document
     app.get("/mongooses/:id/destroy", function(req, res) {
 
-        // Delete a single animal document
-        // and redirect to the home page
-        Animal.remove({_id: req.params.id}, function(err, animal) {
-            console.log("Animal deleted!");
-            res.redirect("/");
-        });
+        showanimals.deleteAnimal(req, res);
 
     });
-
 
 }

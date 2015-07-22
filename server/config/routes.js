@@ -21,29 +21,21 @@ module.exports = function(app) {
 
     });
 
-
-
+    // Update a single animal
     app.get("/mongooses/:id/edit", function(req, res) {
-        Animal.findOne({_id: req.params.id}, function(err, animal) {
-
-            console.log("Edit an animal");
-
-            res.render("editanimal", {animal: animal});
-        });
+        showanimals.updateSingleAnimal(req, res);
     });
-
-
-
-
-
 
     // Route to add an animal to DB
     app.post("/mongooses", function(req, res) {
-
         showanimals.addanimal(req, res);
+    });
 
-        //// Show form data posted
-        //console.log("POST DATA", req.body);
+
+    // Route to update a single
+    // animal document
+    app.post("/mongooses/:id", function(req, res) {
+        showanimals.executeUpdateAnimal(req, res);
 
         // Create a new animal with the
         // corresponding "name" form field
@@ -52,38 +44,11 @@ module.exports = function(app) {
         //    name: req.body.name
         //});
 
-        //// Save a single animal into MongoDB
-        //animal.save(function(err) {
-        //    if(err) {
-        //        console.log("Animal not saved in MongoDB 'animals' database.")
-        //    }
-        //    else {
-        //        console.log("Successfully updated an animal.");
-        //        res.redirect("/");
-        //    }
+        //Update a single animal document
+        //and redirect to the home page
+        //Animal.update({_id: req.params.id}, {name: req.body.name}, function(err, animal) {
+        //    res.redirect("/");
         //});
-
-    });
-
-
-
-
-
-// Route to update a single
-// animal document
-    app.post("/mongooses/:id", function(req, res) {
-        // Create a new animal with the
-        // corresponding "name" form field
-        // from req.body
-        var animal = new Animal({
-            name: req.body.name
-        });
-
-        // Update a single animal document
-        // and redirect to the home page
-        Animal.update({_id: req.params.id}, {name: req.body.name}, function(err, animal) {
-            res.redirect("/");
-        });
 
     });
 
